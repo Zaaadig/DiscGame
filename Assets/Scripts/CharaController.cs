@@ -15,6 +15,7 @@ public class CharaController : MonoBehaviour
     [SerializeField] private float m_dashDuration = 0.2f;
     [SerializeField] private ParticleSystem m_trailVFX;
     [SerializeField] private CharaController m_charaController;
+    [SerializeField] private Timer m_timer;
 
     public GameObject m_player;
 
@@ -76,6 +77,10 @@ public class CharaController : MonoBehaviour
             m_rb.velocity = Vector2.ClampMagnitude(m_rb.velocity, m_maxSpeed);
         }
     }
+    public void TakeDamage3(BorderDisc disc3)
+    {
+        KillChara();
+    }
 
     public void TakeDamage2(EnemyMovement disc2)
     {
@@ -94,6 +99,7 @@ public class CharaController : MonoBehaviour
         m_charaController.enabled = false;
         m_rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         m_rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        m_timer.timeIsRunning = false;
         StartCoroutine(LoadScene());
 
     }
@@ -110,6 +116,7 @@ public class CharaController : MonoBehaviour
         {
             DiscController disc = collision.GetComponentInParent<DiscController>();
             EnemyMovement disc2 = collision.GetComponentInParent<EnemyMovement>();
+            BorderDisc disc3 = collision.GetComponentInParent<BorderDisc>();
             if (disc)
             {
                 TakeDamage(disc);
@@ -118,6 +125,11 @@ public class CharaController : MonoBehaviour
             if (disc2)
             {
                 TakeDamage2(disc2);
+            }
+
+            if (disc3)
+            {
+                TakeDamage3(disc3);
             }
         }
     }

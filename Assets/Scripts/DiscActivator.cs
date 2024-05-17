@@ -13,9 +13,12 @@ public class DiscActivator : MonoBehaviour
     [SerializeField] private GameObject m_Cont1;
     [SerializeField] private GameObject m_Cont2;
     [SerializeField] private GameObject m_Cont3;
+    [SerializeField] private GameObject m_ContBase;
+    [SerializeField] private DiscSpawner discSpawner;
     void Start()
     {
         StartCoroutine(ActivatorDisc());
+        StartCoroutine(DisableIndicator());
     }
 
     private IEnumerator ActivatorDisc()
@@ -43,6 +46,12 @@ public class DiscActivator : MonoBehaviour
         yield return new WaitForSeconds(2);
         m_Disc3.SetActive (true);
         m_Cont3.SetActive(false);
+    }
+
+    private IEnumerator DisableIndicator()
+    {
+        yield return new WaitForSeconds(discSpawner.spawnMax);
+        m_ContBase.SetActive(false);
     }
 
 }

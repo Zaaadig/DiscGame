@@ -517,7 +517,10 @@ MonoBehaviour:
   m_trailVFX: {fileID: 0}
   m_charaController: {fileID: 0}
   m_hitBox: {fileID: 7582336866791847522}
-  m_collide: {fileID: 1904109347731994950}
+  circle1: {fileID: 6155877696759239215}
+  circle2: {fileID: 7201658631372287246}
+  triangle1: {fileID: 6998640047769724942}
+  triangle2: {fileID: 9070546158941424747}
 --- !u!1 &7443304552362322703
 GameObject:
   m_ObjectHideFlags: 0

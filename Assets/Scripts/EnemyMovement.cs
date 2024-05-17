@@ -21,15 +21,15 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private CircleCollider2D m_hitBox;
 
     [Header("Dash Enemy")]
-    public Transform player; // Reference to the player's transform
+    public Transform player;
     public Animator animator;
-    public float moveSpeed = 3f; // Speed of regular movement
-    public float dashSpeed = 10f; // Speed of dashing
-    public float dashDuration = 0.5f; // Duration of the dash
-    public float dashCooldown = 0.5f; // Cooldown between dashes
+    public float moveSpeed = 3f;
+    public float dashSpeed = 10f;
+    public float dashDuration = 0.5f;
+    public float dashCooldown = 0.5f;
     public float dashAnim = 2.5f;
-    private bool isDashing = false; // Flag to track if currently dashing
-    private Vector3 dashDirection; // Direction of dash
+    private bool isDashing = false;
+    private Vector3 dashDirection;
     public ParticleSystem trailVFX;
 
     [Header("Start")]
@@ -38,7 +38,6 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         Launch();
-        // Start a coroutine for periodic dashing
         StartCoroutine(DashPeriodically());
     }
 
@@ -51,7 +50,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        // Regular movement towards the player
         if (!isDashing)
         {
             transform.position += dashDirection * moveSpeed * Time.deltaTime;
@@ -82,12 +80,10 @@ public class EnemyMovement : MonoBehaviour
 
             yield return new WaitForSeconds(dashCooldown);
 
-            // Calculate dash direction towards the player
             dashDirection = (player.position - transform.position).normalized;
             trailVFX.Play();
             animator.Play("HoldState");
 
-            // Dash towards the player
             StartCoroutine(Dash());
         }
     }
@@ -96,10 +92,8 @@ public class EnemyMovement : MonoBehaviour
     {
         isDashing = true;
 
-        // Store the dash start time
         float startTime = Time.time;
 
-        // Move the enemy towards the player at dash speed
         while (Time.time < startTime + dashDuration)
         {
             transform.position += dashDirection * dashSpeed * Time.deltaTime;

@@ -7,6 +7,8 @@ public class DiscSpawner : MonoBehaviour
 
     [SerializeField] private DiscController m_discPrefab;
     [SerializeField] private float m_spawnFrequency = 2;
+    [SerializeField] private Timer timer;
+    [SerializeField] public float spawnMax;
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class DiscSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(m_spawnFrequency);
         SpawnDisc();
-        StartCoroutine(C_Spawn());
+        if(timer.elapsedTime < spawnMax)
+            StartCoroutine(C_Spawn());
     }
 }
