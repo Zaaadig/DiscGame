@@ -29,6 +29,8 @@ public class CharaController : MonoBehaviour
     private Vector2 m_currentInput;
     private bool m_isMoving = false;
 
+    public GameObject button;
+
     private void Update()
     {
         SetDrag();
@@ -107,7 +109,7 @@ public class CharaController : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("SampleScene");
+        button.SetActive(true);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
