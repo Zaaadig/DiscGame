@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,12 +23,12 @@ public class CharaController : MonoBehaviour
 
     private bool m_isAlive = true;
     private bool m_isDashing = false;
-    private float m_dashTimer = 0f;
 
     private Vector2 m_currentInput;
     private bool m_isMoving = false;
 
     public GameObject button;
+    public GameObject button1;
 
     private void Update()
     {
@@ -110,6 +109,7 @@ public class CharaController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         button.SetActive(true);
+        button1.SetActive(true);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
